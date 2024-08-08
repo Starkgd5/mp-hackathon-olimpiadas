@@ -1,4 +1,4 @@
-// src/components/MedalTable.jsx
+import PropTypes from 'prop-types';
 
 const MedalTable = ({ medals }) => {
   return (
@@ -7,8 +7,8 @@ const MedalTable = ({ medals }) => {
         <tr>
           <th className="py-2 px-4 bg-gray-200">País</th>
           <th className="py-2 px-4 bg-yellow-200">Bandeira</th>
-          <th className="py-2 px-4 bg-yellow-200">Ouro</th>
-          <th className="py-2 px-4 bg-gray-400">Prata</th>
+          <th className="py-2 px-4 bg-yellow-400">Ouro</th>
+          <th className="py-2 px-4 bg-gray-300">Prata</th>
           <th className="py-2 px-4 bg-yellow-600">Bronze</th>
           <th className="py-2 px-4 bg-gray-100">Total</th>
           <th className="py-2 px-4 bg-gray-200">Ranking</th>
@@ -17,13 +17,19 @@ const MedalTable = ({ medals }) => {
       </thead>
       <tbody>
         {medals.map((medal, index) => (
-          <tr key={index} className="border-b">
+          <tr key={index} className="border-b hover:bg-gray-100 transition-colors duration-200">
             <td className="py-2 px-4">{medal.name}</td>
-            <td className="py-2 px-4"><img src={medal.flag_url} alt={`Bandeira de ${medal.name}`} className="h-6 w-8" /></td>
-            <td className="py-2 px-4 text-center">{medal.gold_medals}</td>
-            <td className="py-2 px-4 text-center">{medal.silver_medals}</td>
-            <td className="py-2 px-4 text-center">{medal.bronze_medals}</td>
-            <td className="py-2 px-4 text-center">{medal.total_medals}</td>
+            <td className="py-2 px-4">
+              <img
+                src={medal.flag_url}
+                alt={`Bandeira de ${medal.name}`}
+                className="h-6 w-8 inline-block"
+              />
+            </td>
+            <td className="py-2 px-4 text-center text-yellow-600 font-bold">{medal.gold_medals}</td>
+            <td className="py-2 px-4 text-center text-gray-500">{medal.silver_medals}</td>
+            <td className="py-2 px-4 text-center text-yellow-800">{medal.bronze_medals}</td>
+            <td className="py-2 px-4 text-center font-semibold">{medal.total_medals}</td>
             <td className="py-2 px-4 text-center">{medal.rank}</td>
             <td className="py-2 px-4 text-center">{medal.rank_total_medals}</td>
           </tr>
@@ -31,6 +37,21 @@ const MedalTable = ({ medals }) => {
       </tbody>
     </table>
   );
+};
+
+MedalTable.propTypes = {
+  medals: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      flag_url: PropTypes.string.isRequired,
+      gold_medals: PropTypes.number.isRequired,
+      silver_medals: PropTypes.number.isRequired,
+      bronze_medals: PropTypes.number.isRequired,
+      total_medals: PropTypes.number.isRequired,
+      rank: PropTypes.number.isRequired,
+      rank_total_medals: PropTypes.number.isRequired,
+    })
+  ).isRequired,
 };
 
 export default MedalTable;

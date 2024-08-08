@@ -1,4 +1,4 @@
-// src/components/CountryFilter.jsx
+import PropTypes from 'prop-types';
 
 const CountryFilter = ({ onFilterChange }) => {
   const handleChange = (event) => {
@@ -7,7 +7,9 @@ const CountryFilter = ({ onFilterChange }) => {
 
   return (
     <div className="mb-4">
-      <label className="block text-sm font-medium text-gray-700">Filtrar por país:</label>
+      <label className="block text-sm font-medium text-gray-700">
+        Filtrar por país:
+      </label>
       <input
         type="text"
         onChange={handleChange}
@@ -16,6 +18,10 @@ const CountryFilter = ({ onFilterChange }) => {
       />
     </div>
   );
+};
+
+CountryFilter.propTypes = {
+  onFilterChange: PropTypes.func.isRequired,
 };
 
 export default CountryFilter;
